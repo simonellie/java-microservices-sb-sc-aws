@@ -1,8 +1,7 @@
 package com.xantrix.webapp.controller;
 
-import com.xantrix.webapp.ArticoliWebServiceApplication;
-import com.xantrix.webapp.entities.Articoli;
-import com.xantrix.webapp.repository.ArticoliRepository;
+import com.xantrix.webapp.ItemsWebServiceApplication;
+import com.xantrix.webapp.entity.Item;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -11,6 +10,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 //import java.util.Locale;
 
+import com.xantrix.webapp.repository.ItemRepository;
 import org.junit.Before;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
@@ -28,7 +28,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
 @RunWith(SpringRunner.class)
-@ContextConfiguration(classes = ArticoliWebServiceApplication.class)
+@ContextConfiguration(classes = ItemsWebServiceApplication.class)
 @SpringBootTest
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class InsertArtTest {
@@ -39,7 +39,7 @@ public class InsertArtTest {
 	private WebApplicationContext wac;
 	
 	@Autowired
-	ArticoliRepository articoliRepository;
+	ItemRepository itemRepository;
 	
 	@Before
 	public void setup()
@@ -89,8 +89,8 @@ public class InsertArtTest {
 
 				.andDo(print());
 
-				assertThat(articoliRepository.findByCodArt("123Test"))
-				.extracting(Articoli::getCodArt)
+				assertThat(itemRepository.findByCodArt("123Test"))
+				.extracting(Item::getCodArt)
 				.isEqualTo("123Test");
 	}
 	
@@ -186,8 +186,8 @@ public class InsertArtTest {
 				.andExpect(jsonPath("$.message").value("Modifica Articolo 123Test Eseguita Con Successo"))
 				.andDo(print());
 		
-		assertThat(articoliRepository.findByCodArt("123Test"))
-		.extracting(Articoli::getIdStatoArt)
+		assertThat(itemRepository.findByCodArt("123Test"))
+		.extracting(Item::getIdStatoArt)
 		.isEqualTo("2");
 	}
 	

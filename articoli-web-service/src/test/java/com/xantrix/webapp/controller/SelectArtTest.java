@@ -6,7 +6,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import com.xantrix.webapp.ArticoliWebServiceApplication;
+import com.xantrix.webapp.ItemsWebServiceApplication;
 
 import org.junit.Before;
 import org.junit.FixMethodOrder;
@@ -24,7 +24,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
 @RunWith(SpringRunner.class)
-@ContextConfiguration(classes = ArticoliWebServiceApplication.class)
+@ContextConfiguration(classes = ItemsWebServiceApplication.class)
 @SpringBootTest
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class SelectArtTest {
