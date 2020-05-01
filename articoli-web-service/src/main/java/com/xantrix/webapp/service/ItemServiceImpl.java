@@ -3,7 +3,6 @@ package com.xantrix.webapp.service;
 import com.xantrix.webapp.entity.Item;
 import com.xantrix.webapp.repository.ItemRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

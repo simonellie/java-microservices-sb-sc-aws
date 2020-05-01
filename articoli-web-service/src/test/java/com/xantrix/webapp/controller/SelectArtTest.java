@@ -28,7 +28,7 @@ import org.springframework.web.context.WebApplicationContext;
 @SpringBootTest
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class SelectArtTest {
-private MockMvc mockMvc;
+	private MockMvc mockMvc;
 	
 	@Autowired
 	private WebApplicationContext wac;
@@ -36,10 +36,9 @@ private MockMvc mockMvc;
 	@Before
 	public void setup()	{
 		this.mockMvc = MockMvcBuilders.webAppContextSetup(wac).build();
-
 	}
 	
-	private String ApiBaseUrl = "/api/articoli";
+	private String ApiBaseUrl = "/api/items";
 	
 	String JsonData =  
 			"{\n" + 
@@ -61,7 +60,7 @@ private MockMvc mockMvc;
 			"        \"id\": 1,\n" + 
 			"        \"descrizione\": \"DROGHERIA ALIMENTARE\"\n" + 
 			"    },\n" + 
-			"    \"ingredienti\": null,\n" + 
+			"    \"ingredient\": null,\n" +
 			"    \"iva\": {\n" + 
 			"        \"idIva\": 22,\n" + 
 			"        \"descrizione\": \"IVA RIVENDITA 22%\",\n" + 
@@ -74,7 +73,7 @@ private MockMvc mockMvc;
 	 */
 	@Test
 	public void A_listArtByEan() throws Exception {
-		mockMvc.perform(MockMvcRequestBuilders.get(ApiBaseUrl + "/cerca/ean/8008490000021")
+		mockMvc.perform(MockMvcRequestBuilders.get(ApiBaseUrl + "/search/ean/8008490000021")
 				.accept(MediaType.APPLICATION_JSON))
 				.andExpect(status().isOk())
 				.andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
@@ -105,8 +104,8 @@ private MockMvc mockMvc;
 				.andExpect(jsonPath("$.famAssort.id").value("1")) 
 				.andExpect(jsonPath("$.famAssort.descrizione").exists())
 				.andExpect(jsonPath("$.famAssort.descrizione").value("DROGHERIA ALIMENTARE")) 
-				 //ingredienti
-				.andExpect(jsonPath("$.ingredienti").isEmpty())
+				 //ingredient
+				.andExpect(jsonPath("$.ingredient").isEmpty())
 				 //Iva
 				.andExpect(jsonPath("$.iva.idIva").exists())
 				.andExpect(jsonPath("$.iva.idIva").value("22")) 
@@ -122,19 +121,19 @@ private MockMvc mockMvc;
 	
 	@Test
 	public void B_ErrlistArtByEan() throws Exception {
-		mockMvc.perform(MockMvcRequestBuilders.get(ApiBaseUrl + "/cerca/ean/" + Barcode)
+		mockMvc.perform(MockMvcRequestBuilders.get(ApiBaseUrl + "/search/ean/" + Barcode)
 				.contentType(MediaType.APPLICATION_JSON)
 				.content(JsonData)
 				.accept(MediaType.APPLICATION_JSON))
 				.andExpect(status().isNotFound())
-				.andExpect(jsonPath("$.codice").value(404))
-				.andExpect(jsonPath("$.messaggio").value("Il barcode " + Barcode + " non è stato trovato!"))
+				.andExpect(jsonPath("$.code").value(404))
+				.andExpect(jsonPath("$.message").value("Item with barcode " + Barcode + " not found."))
 				.andDo(print());
 	}
 	
 	@Test
 	public void C_listArtByCodArt() throws Exception {
-		mockMvc.perform(MockMvcRequestBuilders.get(ApiBaseUrl + "/cerca/codice/002000301")
+		mockMvc.perform(MockMvcRequestBuilders.get(ApiBaseUrl + "/search/code/002000301")
 				.accept(MediaType.APPLICATION_JSON))
 				.andExpect(status().isOk())
 				.andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
@@ -146,13 +145,13 @@ private MockMvc mockMvc;
 	
 	@Test
 	public void D_ErrlistArtByCodArt() throws Exception	{
-		mockMvc.perform(MockMvcRequestBuilders.get(ApiBaseUrl + "/cerca/codice/" + CodArt)
+		mockMvc.perform(MockMvcRequestBuilders.get(ApiBaseUrl + "/search/code/" + CodArt)
 				.contentType(MediaType.APPLICATION_JSON)
 				.content(JsonData)
 				.accept(MediaType.APPLICATION_JSON))
 				.andExpect(status().isNotFound())
-				.andExpect(jsonPath("$.codice").value(404))
-				.andExpect(jsonPath("$.messaggio").value("L'articolo con codice " + CodArt + " non è stato trovato!"))
+				.andExpect(jsonPath("$.code").value(404))
+				.andExpect(jsonPath("$.message").value("Item with code " + CodArt + " not found."))
 				.andDo(print());
 	}
 	
@@ -160,7 +159,7 @@ private MockMvc mockMvc;
 
 	@Test
 	public void E_listArtByDesc() throws Exception {
-		mockMvc.perform(MockMvcRequestBuilders.get(ApiBaseUrl + "/cerca/descrizione/ACQUA ULIVETO 15 LT")
+		mockMvc.perform(MockMvcRequestBuilders.get(ApiBaseUrl + "/search/description/ACQUA ULIVETO 15 LT")
 				.accept(MediaType.APPLICATION_JSON))
 				.andExpect(status().isOk())
 				.andExpect(jsonPath("$", hasSize(1)))
@@ -173,11 +172,11 @@ private MockMvc mockMvc;
 	public void G_TestErrlistArtByDesc() throws Exception {
 		String Filter = "123ABC";
 		
-		mockMvc.perform(MockMvcRequestBuilders.get(ApiBaseUrl + "/cerca/descrizione/" + Filter)
+		mockMvc.perform(MockMvcRequestBuilders.get(ApiBaseUrl + "/search/description/" + Filter)
 				.accept(MediaType.APPLICATION_JSON))
 				.andExpect(status().isNotFound())
-				.andExpect(jsonPath("$.codice").value(404))
-				.andExpect(jsonPath("$.messaggio").value("Non è stato trovato alcun articolo avente descrizione " + Filter))
+				.andExpect(jsonPath("$.code").value(404))
+				.andExpect(jsonPath("$.message").value("Items with description " + Filter + " not found."))
 				.andReturn();
 	}
 }

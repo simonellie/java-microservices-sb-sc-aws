@@ -1,30 +1,19 @@
 package com.xantrix.webapp.exception;
 
-public class BindingException extends Exception
-{
-	private static final long serialVersionUID = 1L;
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
+public class BindingException extends Exception {
+	private String message;
 	
-	private String messaggio;
-	
-	public BindingException()
-	{
+	public BindingException() {
 		super();
 	}
 	
-	public BindingException(String Messaggio)
-	{
-		super(Messaggio);
-		this.messaggio = Messaggio;
+	public BindingException(String message) {
+		super(message);
+		this.message = message;
 	}
-
-	public String getMessaggio()
-	{
-		return messaggio;
-	}
-
-	public void setMessaggio(String messaggio)
-	{
-		this.messaggio = messaggio;
-	}
-
 }

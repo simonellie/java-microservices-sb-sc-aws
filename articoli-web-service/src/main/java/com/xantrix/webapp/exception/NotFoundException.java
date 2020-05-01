@@ -1,30 +1,19 @@
 package com.xantrix.webapp.exception;
 
-public class NotFoundException  extends Exception
-{
-	private static final long serialVersionUID = 1L;
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
+public class NotFoundException  extends Exception {
+	private String message = "Elemento Ricercato Non Trovato!";
 	
-	private String messaggio = "Elemento Ricercato Non Trovato!";
-	
-	public NotFoundException()
-	{
+	public NotFoundException() {
 		super();
 	}
 	
-	public NotFoundException(String Messaggio)
-	{
-		super(Messaggio);
-		this.messaggio = Messaggio;
+	public NotFoundException(String message) {
+		super(message);
+		this.message = message;
 	}
-
-	public String getMessaggio()
-	{
-		return messaggio;
-	}
-
-	public void setMessaggio(String messaggio)
-	{
-		this.messaggio = messaggio;
-	}
-
 }
