@@ -2,6 +2,8 @@ package com.xantrix.webapp.entity;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -10,7 +12,8 @@ import java.util.Set;
 
 @Entity
 @Table(name = "ARTICOLI")
-@Data
+@Getter
+@Setter
 public class Item implements Serializable {
   @Id
   @Column(name="CODART")
@@ -20,7 +23,7 @@ public class Item implements Serializable {
   @Column(name="UM")
   private String um;
   @Column(name="CODSTAT")
-  private String codstat;
+  private String codStat;
   @Column(name="PZCART")
   private long pzCart;
   @Column(name="PESONETTO")
@@ -28,7 +31,7 @@ public class Item implements Serializable {
   @Column(name="IDSTATOART")
   private String idStatoArt;
   @Column(name="DATACREAZIONE")
-  private java.sql.Date datacreazione;
+  private java.sql.Date dataCreaz;
 
   @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "item", orphanRemoval = true)
   @JsonManagedReference

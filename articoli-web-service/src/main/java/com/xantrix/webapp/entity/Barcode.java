@@ -3,13 +3,16 @@ package com.xantrix.webapp.entity;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
 @Table(name = "BARCODE")
-@Data
+@Getter
+@Setter
 public class Barcode implements Serializable {
   @Id
   @Column(name="BARCODE")
