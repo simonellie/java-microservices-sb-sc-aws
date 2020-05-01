@@ -30,7 +30,9 @@ services:
     restart: unless-stopped
     container_name: pgadmin4
     volumes:
-      - dockervol:/var/lib/pgadmin/storage/admin
+      - type: bind
+        source: ./dockervol
+        target: /var/lib/pgadmin/storage/admin
     networks:
       ntpgsql:
         ipv4_address: 172.21.0.3
