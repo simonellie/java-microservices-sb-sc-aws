@@ -7,6 +7,7 @@ import com.xantrix.webapp.exception.instance.BindingException;
 import com.xantrix.webapp.exception.instance.DuplicateException;
 import com.xantrix.webapp.exception.instance.NotFoundException;
 import com.xantrix.webapp.service.ItemService;
+import io.swagger.annotations.*;
 import org.hibernate.cfg.NotYetImplementedException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,6 +26,7 @@ import java.util.Locale;
 
 @RestController
 @RequestMapping("api/item")
+@Api(value = "alphashop", tags = "Controller for item's handling")
 public class ItemController {
     private static final Logger logger = LoggerFactory.getLogger(ItemController.class);
 
@@ -34,8 +36,20 @@ public class ItemController {
     @Autowired
     ResourceBundleMessageSource resourceBundleMessageSource;
 
+    @ApiOperation(
+            value = "Search item for barcode",
+            notes = "Return item data in json format",
+            response = Item.class,
+            produces = "application/json")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Item found"),
+            @ApiResponse(code = 404, message = "Item not found"),
+            @ApiResponse(code = 403, message = "No authorization"),
+            @ApiResponse(code = 401, message = "No authentication")
+    })
     @GetMapping(value = "/search/ean/{barcode}")
-    public ResponseEntity<Item> listItemsByEan(@PathVariable("barcode") String barcode) throws NotFoundException {
+    public ResponseEntity<Item> listItemsByEan(
+            @ApiParam("Unique barcode for item") @PathVariable("barcode") String barcode) throws NotFoundException {
         Item item = itemService.SelByBarcode(barcode);
         if (item == null) {
             String errorMessage = String.format("Item with barcode %s not found.", barcode);

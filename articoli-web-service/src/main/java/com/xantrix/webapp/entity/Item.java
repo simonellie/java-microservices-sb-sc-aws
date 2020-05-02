@@ -1,6 +1,7 @@
 package com.xantrix.webapp.entity;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
@@ -23,6 +24,7 @@ public class Item implements Serializable {
   @Column(name="CODART")
   @Size(min = 5, max = 20, message = "{Size.Item.codArt.Validation}")
   @NotNull(message = "{NotNull.Item.codArt.Validation}")
+  @ApiModelProperty(notes = "Unique code for Item entity")
   private String codArt;
   @Column(name="DESCRIZIONE")
   @Size(min = 6, max = 80, message = "{Size.Item.descrizione.Validation}")
