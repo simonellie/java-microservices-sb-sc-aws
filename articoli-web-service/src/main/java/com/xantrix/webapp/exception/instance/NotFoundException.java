@@ -1,4 +1,4 @@
-package com.xantrix.webapp.exception;
+package com.xantrix.webapp.exception.instance;
 
 import lombok.Getter;
 import lombok.Setter;

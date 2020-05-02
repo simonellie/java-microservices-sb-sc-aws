@@ -1,8 +1,7 @@
 package com.xantrix.webapp.controller;
 
-import com.xantrix.webapp.entity.Barcode;
 import com.xantrix.webapp.entity.Item;
-import com.xantrix.webapp.exception.NotFoundException;
+import com.xantrix.webapp.exception.instance.NotFoundException;
 import com.xantrix.webapp.service.ItemService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

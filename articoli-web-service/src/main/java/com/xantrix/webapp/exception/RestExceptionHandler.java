@@ -1,5 +1,8 @@
 package com.xantrix.webapp.exception;
 
+import com.xantrix.webapp.exception.instance.BindingException;
+import com.xantrix.webapp.exception.instance.DuplicateException;
+import com.xantrix.webapp.exception.instance.NotFoundException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,25 +25,25 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
 	
 	@ExceptionHandler(BindingException.class)
 	public ResponseEntity<ErrorResponse> exceptionBindingHandler(Exception ex) {
-		ErrorResponse errore = new ErrorResponse();
-		errore.setCode(HttpStatus.BAD_REQUEST.value());
-		errore.setMessage(ex.getMessage());
-		return new ResponseEntity<>(errore, new HttpHeaders(), HttpStatus.BAD_REQUEST);
+		ErrorResponse error = new ErrorResponse();
+		error.setCode(HttpStatus.BAD_REQUEST.value());
+		error.setMessage(ex.getMessage());
+		return new ResponseEntity<>(error, new HttpHeaders(), HttpStatus.BAD_REQUEST);
 	}
 	
 	@ExceptionHandler(DuplicateException.class)
 	public ResponseEntity<ErrorResponse> exceptionDeplicateRecordHandler(Exception ex) {
-		ErrorResponse errore = new ErrorResponse();
-		errore.setCode(HttpStatus.NOT_ACCEPTABLE.value());
-		errore.setMessage(ex.getMessage());
-		return new ResponseEntity<>(errore, HttpStatus.NOT_ACCEPTABLE);
+		ErrorResponse error = new ErrorResponse();
+		error.setCode(HttpStatus.NOT_ACCEPTABLE.value());
+		error.setMessage(ex.getMessage());
+		return new ResponseEntity<>(error, HttpStatus.NOT_ACCEPTABLE);
     }
     
 	@ExceptionHandler(Exception.class)
 	public ResponseEntity<ErrorResponse> exceptionHandler(Exception ex)	{
-		ErrorResponse errore = new ErrorResponse();
-		errore.setMessage("Generic error during request execution.");
-		errore.setCode(HttpStatus.BAD_REQUEST.value());
-		return new ResponseEntity<>(errore, HttpStatus.BAD_REQUEST);
+		ErrorResponse error = new ErrorResponse();
+		error.setMessage("Generic error during request execution.");
+		error.setCode(HttpStatus.BAD_REQUEST.value());
+		return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
 	}
 }
