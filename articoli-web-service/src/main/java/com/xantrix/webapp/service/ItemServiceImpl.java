@@ -37,7 +37,7 @@ public class ItemServiceImpl implements ItemService {
 
     @Override
     @Transactional
-    public void insertItem(Item item) {
+    public void saveItem(Item item) {
         itemRepository.save(item);
     }
 }

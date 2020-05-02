@@ -38,7 +38,7 @@ public class SelectItemTest {
 		this.mockMvc = MockMvcBuilders.webAppContextSetup(wac).build();
 	}
 	
-	private String ApiBaseUrl = "/api/items";
+	private String ApiBaseUrl = "/api/item";
 	
 	String JsonData =  
 			"{\n" + 

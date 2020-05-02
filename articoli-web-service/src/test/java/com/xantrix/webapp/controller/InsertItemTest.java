@@ -42,12 +42,11 @@ public class InsertItemTest {
 	ItemRepository itemRepository;
 	
 	@Before
-	public void setup()
-	{
+	public void setup()	{
 		this.mockMvc = MockMvcBuilders.webAppContextSetup(wac).build();
 	}
 	
-	private String ApiBaseUrl = "/api/articoli";
+	private String ApiBaseUrl = "/api/item";
 	
 	String JsonData =  
 			"{\r\n" + 
@@ -65,7 +64,7 @@ public class InsertItemTest {
 			"            \"idTipoArt\": \"CP\"\r\n" + 
 			"        }\r\n" + 
 			"    ],\r\n" + 
-			"    \"ingredienti\": null,\r\n" + 
+			"    \"ingredients\": null,\r\n" +
 			"    \"iva\": {\r\n" + 
 			"        \"idIva\": 22,\r\n" + 
 			"        \"descrizione\": \"IVA RIVENDITA 22%\",\r\n" + 
@@ -79,14 +78,11 @@ public class InsertItemTest {
 	
 	@Test
 	public void A_testInsArticolo() throws Exception {
-		mockMvc.perform(MockMvcRequestBuilders.post(ApiBaseUrl + "/inserisci")
+		mockMvc.perform(MockMvcRequestBuilders.post(ApiBaseUrl + "/add")
 				.contentType(MediaType.APPLICATION_JSON)
 				.content(JsonData)
 				.accept(MediaType.APPLICATION_JSON))
 				.andExpect(status().isCreated())
-				.andExpect(jsonPath("$.code").value("200 OK"))
-				.andExpect(jsonPath("$.message").value("Inserimento Articolo 123Test Eseguita Con Successo"))
-
 				.andDo(print());
 
 				assertThat(itemRepository.findByCodArt("123Test"))
@@ -96,13 +92,13 @@ public class InsertItemTest {
 	
 	@Test
 	public void B_testErrInsArticolo() throws Exception	{
-		mockMvc.perform(MockMvcRequestBuilders.post(ApiBaseUrl + "/inserisci")
+		mockMvc.perform(MockMvcRequestBuilders.post(ApiBaseUrl + "/add")
 				.contentType(MediaType.APPLICATION_JSON)
 				.content(JsonData)
 				.accept(MediaType.APPLICATION_JSON))
 				.andExpect(status().isNotAcceptable())
-				.andExpect(jsonPath("$.codice").value(406))
-				.andExpect(jsonPath("$.messaggio").value("Articolo 123Test presente in anagrafica! Impossibile utilizzare il metodo POST"))
+				.andExpect(jsonPath("$.code").value(406))
+				.andExpect(jsonPath("$.message").value("Add for item 123Test already available! It's impossible to use a POST method."))
 				.andDo(print());
 	}
 	
@@ -122,7 +118,7 @@ public class InsertItemTest {
 					"            \"idTipoArt\": \"CP\"\r\n" + 
 					"        }\r\n" + 
 					"    ],\r\n" + 
-					"    \"ingredienti\": null,\r\n" + 
+					"    \"ingredients\": null,\r\n" +
 					"    \"iva\": {\r\n" + 
 					"        \"idIva\": 22,\r\n" + 
 					"        \"descrizione\": \"IVA RIVENDITA 22%\",\r\n" + 
@@ -136,13 +132,13 @@ public class InsertItemTest {
 	
 	@Test
 	public void C_testErrInsArticolo() throws Exception	{
-		mockMvc.perform(MockMvcRequestBuilders.post(ApiBaseUrl + "/inserisci")
+		mockMvc.perform(MockMvcRequestBuilders.post(ApiBaseUrl + "/add")
 				.contentType(MediaType.APPLICATION_JSON)
 				.content(ErrJsonData)
 				.accept(MediaType.APPLICATION_JSON))
 				.andExpect(status().isBadRequest())
-				.andExpect(jsonPath("$.codice").value(400))
-				.andExpect(jsonPath("$.messaggio").value("Il campo Descrizione deve avere un numero di caratteri compreso tra 6 e 80"))
+				.andExpect(jsonPath("$.code").value(400))
+				.andExpect(jsonPath("$.message").value("The Description field must have a number of characters between 6 and 80"))
 				.andDo(print());
 	}
 	
@@ -162,7 +158,7 @@ public class InsertItemTest {
 			"            \"idTipoArt\": \"CP\"\r\n" + 
 			"        }\r\n" + 
 			"    ],\r\n" + 
-			"    \"ingredienti\": null,\r\n" + 
+			"    \"ingredients\": null,\r\n" +
 			"    \"iva\": {\r\n" + 
 			"        \"idIva\": 22,\r\n" + 
 			"        \"descrizione\": \"IVA RIVENDITA 22%\",\r\n" + 
@@ -177,13 +173,11 @@ public class InsertItemTest {
 	@Test
 	public void D_testUpdArticolo() throws Exception {
 				
-		mockMvc.perform(MockMvcRequestBuilders.put(ApiBaseUrl + "/modifica")
+		mockMvc.perform(MockMvcRequestBuilders.put(ApiBaseUrl + "/edit")
 				.contentType(MediaType.APPLICATION_JSON)
 				.content(JsonDataMod)
 				.accept(MediaType.APPLICATION_JSON))
-				.andExpect(status().isCreated())
-				.andExpect(jsonPath("$.code").value("200 OK"))
-				.andExpect(jsonPath("$.message").value("Modifica Articolo 123Test Eseguita Con Successo"))
+				.andExpect(status().isOk())
 				.andDo(print());
 		
 		assertThat(itemRepository.findByCodArt("123Test"))
@@ -207,7 +201,7 @@ public class InsertItemTest {
 			"            \"idTipoArt\": \"CP\"\r\n" + 
 			"        }\r\n" + 
 			"    ],\r\n" + 
-			"    \"ingredienti\": null,\r\n" + 
+			"    \"ingredients\": null,\r\n" +
 			"    \"iva\": {\r\n" + 
 			"        \"idIva\": 22,\r\n" + 
 			"        \"descrizione\": \"IVA RIVENDITA 22%\",\r\n" + 
@@ -221,35 +215,35 @@ public class InsertItemTest {
 	
 	@Test
 	public void E_testErrUpdArticolo() throws Exception	{
-		mockMvc.perform(MockMvcRequestBuilders.put(ApiBaseUrl + "/modifica")
+		mockMvc.perform(MockMvcRequestBuilders.put(ApiBaseUrl + "/edit")
 				.contentType(MediaType.APPLICATION_JSON)
 				.content(ErrJsonDataMod)
 				.accept(MediaType.APPLICATION_JSON))
 				.andExpect(status().isNotFound())
-				.andExpect(jsonPath("$.codice").value(404))
-				.andExpect(jsonPath("$.messaggio").value("Articolo pippo123 non presente in anagrafica! Impossibile utilizzare il metodo PUT"))
+				.andExpect(jsonPath("$.code").value(404))
+				.andExpect(jsonPath("$.message").value("Item pippo123 not available! It's impossible to use a PUT method."))
 				.andDo(print());
 	}
 	
 	@Test
 	public void F_testDelArticolo() throws Exception {
-		mockMvc.perform(MockMvcRequestBuilders.delete(ApiBaseUrl + "/elimina/123Test")
+		mockMvc.perform(MockMvcRequestBuilders.delete(ApiBaseUrl + "/delete/123Test")
 				.accept(MediaType.APPLICATION_JSON))
 				.andExpect(status().isOk())
-				.andExpect(jsonPath("$.code").value("200 OK"))
-				.andExpect(jsonPath("$.message").value("Eliminazione Articolo 123Test Eseguita Con Successo"))
+				.andExpect(jsonPath("$.code").value(200))
+				.andExpect(jsonPath("$.message").value("Delete item 123Test execute with success."))
 				.andDo(print());
 	}
 	
 	@Test
 	public void G_testErrDelArticolo() throws Exception	{
-		mockMvc.perform(MockMvcRequestBuilders.delete(ApiBaseUrl + "/elimina/123Test")
+		mockMvc.perform(MockMvcRequestBuilders.delete(ApiBaseUrl + "/delete/123Test")
 				.contentType(MediaType.APPLICATION_JSON)
 				.content(ErrJsonDataMod)
 				.accept(MediaType.APPLICATION_JSON))
 				.andExpect(status().isNotFound())
-				.andExpect(jsonPath("$.codice").value(404))
-				.andExpect(jsonPath("$.messaggio").value("Articolo 123Test non presente in anagrafica!"))
+				.andExpect(jsonPath("$.code").value(404))
+				.andExpect(jsonPath("$.message").value("Item 123Test not available!"))
 				.andDo(print());
 	}
 	

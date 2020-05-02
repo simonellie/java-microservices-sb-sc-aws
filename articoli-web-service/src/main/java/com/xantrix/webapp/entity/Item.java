@@ -6,6 +6,10 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
@@ -17,18 +21,24 @@ import java.util.Set;
 public class Item implements Serializable {
   @Id
   @Column(name="CODART")
+  @Size(min = 5, max = 20, message = "{Size.Item.codArt.Validation}")
+  @NotNull(message = "{NotNull.Item.codArt.Validation}")
   private String codArt;
   @Column(name="DESCRIZIONE")
+  @Size(min = 6, max = 80, message = "{Size.Item.descrizione.Validation}")
   private String descrizione;
   @Column(name="UM")
   private String um;
   @Column(name="CODSTAT")
   private String codStat;
   @Column(name="PZCART")
+  @Max(value = 99, message = "{Max.Item.pzCart.Validation}")
   private long pzCart;
   @Column(name="PESONETTO")
+  @Min(value = (long) 0.01, message = "{Min.Item.pesoNetto.Validation}")
   private double pesoNetto;
   @Column(name="IDSTATOART")
+  @NotNull(message = "{NotNull.Item.idStatoArt.Validation}")
   private String idStatoArt;
   @Column(name="DATACREAZIONE")
   private java.sql.Date dataCreaz;
