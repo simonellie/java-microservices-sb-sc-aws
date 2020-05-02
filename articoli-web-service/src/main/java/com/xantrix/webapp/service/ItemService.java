@@ -9,5 +9,5 @@ public interface ItemService {
     Item SelByCodArt(String codArt);
     Item SelByBarcode(String barcode);
     void deleteItem(Item item);
-    void insertItem(Item item);
+    void saveItem(Item item);
 }
