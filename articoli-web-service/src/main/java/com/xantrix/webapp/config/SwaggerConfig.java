@@ -32,7 +32,7 @@ public class SwaggerConfig {
                 .title("Item Web Service Api")
                 .description("Spring Boot REST API for Items in AlphaShop")
                 .version("1.0.0")
-                .contact(new Contact("Name","http://google.com","test@mail.com"))
+                .contact(new Contact("Name","http://test.com","test@mail.com"))
                 .build();
     }
 }

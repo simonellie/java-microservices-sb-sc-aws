@@ -37,7 +37,7 @@ public class ItemController {
     ResourceBundleMessageSource resourceBundleMessageSource;
 
     @ApiOperation(
-            value = "Search item for barcode",
+            value = "Search item by barcode",
             notes = "Return item data in json format",
             response = Item.class,
             produces = "application/json")
@@ -49,7 +49,8 @@ public class ItemController {
     })
     @GetMapping(value = "/search/ean/{barcode}")
     public ResponseEntity<Item> listItemsByEan(
-            @ApiParam("Unique barcode for item") @PathVariable("barcode") String barcode) throws NotFoundException {
+            @ApiParam("Unique barcode for item") @PathVariable("barcode") String barcode
+    ) throws NotFoundException {
         Item item = itemService.SelByBarcode(barcode);
         if (item == null) {
             String errorMessage = String.format("Item with barcode %s not found.", barcode);
@@ -59,8 +60,21 @@ public class ItemController {
         return new ResponseEntity<>(item, HttpStatus.OK);
     }
 
+    @ApiOperation(
+            value = "Search item by item code",
+            notes = "Return item data in json format",
+            response = Item.class,
+            produces = "application/json")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Item found"),
+            @ApiResponse(code = 404, message = "Item not found"),
+            @ApiResponse(code = 403, message = "No authorization"),
+            @ApiResponse(code = 401, message = "No authentication")
+    })
     @GetMapping(value = "/search/code/{codArt}")
-    public ResponseEntity<Item> listItemsByCodArt(@PathVariable("codArt") String codArt) throws NotFoundException {
+    public ResponseEntity<Item> listItemsByCodArt(
+            @ApiParam("Unique code for item") @PathVariable("codArt") String codArt
+    ) throws NotFoundException {
         Item item = itemService.SelByCodArt(codArt);
         if (item == null) {
             String errorMessage = String.format("Item with code %s not found.", codArt);
@@ -70,8 +84,21 @@ public class ItemController {
         return new ResponseEntity<>(item, HttpStatus.OK);
     }
 
+    @ApiOperation(
+            value = "Search items by item description",
+            notes = "Return items in json format",
+            response = List.class,
+            produces = "application/json")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Item found"),
+            @ApiResponse(code = 404, message = "Item not found"),
+            @ApiResponse(code = 403, message = "No authorization"),
+            @ApiResponse(code = 401, message = "No authentication")
+    })
     @GetMapping(value = "/search/description/{description}")
-    public ResponseEntity<List<Item>> listItemsByDescription(@PathVariable("description") String description) throws NotFoundException {
+    public ResponseEntity<List<Item>> listItemsByDescription(
+            @ApiParam("Item's description") @PathVariable("description") String description
+    ) throws NotFoundException {
         List<Item> items = itemService.SelByDescrizione("%" + description + "%");
         if (items == null || items.isEmpty()) {
             String errorMessage = String.format("Items with description %s not found.", description);
@@ -81,8 +108,23 @@ public class ItemController {
         return new ResponseEntity<>(items, HttpStatus.OK);
     }
 
+    @ApiOperation(
+            value = "Add a new item",
+            notes = "Return added item in json format",
+            response = Item.class,
+            produces = "application/json")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Item added"),
+            @ApiResponse(code = 400, message = "Received item not well formatted"),
+            @ApiResponse(code = 406, message = "Item already added"),
+            @ApiResponse(code = 403, message = "No authorization"),
+            @ApiResponse(code = 401, message = "No authentication")
+    })
     @PostMapping(value = "/add")
-    public ResponseEntity<Item> addItem (@Valid @RequestBody Item item, BindingResult bindingResult /* for validation */) throws BindingException, DuplicateException {
+    public ResponseEntity<Item> addItem (
+            @ApiParam("Item to add") @Valid @RequestBody Item item,
+            @ApiParam("Validation result for item") BindingResult bindingResult /* for validation */
+    ) throws BindingException, DuplicateException {
         if (bindingResult.hasErrors() && bindingResult.getFieldError() != null) {
             String errorMessage = resourceBundleMessageSource.getMessage(bindingResult.getFieldError(), new Locale("en"));
             logger.warn(errorMessage);
@@ -100,8 +142,23 @@ public class ItemController {
         return new ResponseEntity<>(new HttpHeaders(), HttpStatus.CREATED);
     }
 
+    @ApiOperation(
+            value = "Edit an item",
+            notes = "Return edited item in json format",
+            response = Item.class,
+            produces = "application/json")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Item edited"),
+            @ApiResponse(code = 400, message = "Received item not well formatted"),
+            @ApiResponse(code = 404, message = "Item not found"),
+            @ApiResponse(code = 403, message = "No authorization"),
+            @ApiResponse(code = 401, message = "No authentication")
+    })
     @PutMapping(value = "/edit")
-    public ResponseEntity<Item> editItem (@Valid @RequestBody Item item, BindingResult bindingResult /* for validation */) throws BindingException, NotFoundException {
+    public ResponseEntity<Item> editItem (
+            @ApiParam("Item to modify") @Valid @RequestBody Item item,
+            @ApiParam("Validation result for item") BindingResult bindingResult /* for validation */
+    ) throws BindingException, NotFoundException {
         if (bindingResult.hasErrors() && bindingResult.getFieldError() != null) {
             String errorMessage = resourceBundleMessageSource.getMessage(bindingResult.getFieldError(), new Locale("en"));
             logger.warn(errorMessage);
@@ -119,8 +176,21 @@ public class ItemController {
         return new ResponseEntity<>(new HttpHeaders(), HttpStatus.OK);
     }
 
+    @ApiOperation(
+            value = "Delete an item",
+            notes = "Return message for deleted item",
+            response = ObjectNode.class,
+            produces = "application/json")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Item deleted"),
+            @ApiResponse(code = 404, message = "Item not found"),
+            @ApiResponse(code = 403, message = "No authorization"),
+            @ApiResponse(code = 401, message = "No authentication")
+    })
     @DeleteMapping(value = "/delete/{codArt}", produces = "application/json")
-    public ResponseEntity<?> deleteItem (@PathVariable String codArt) throws NotFoundException {
+    public ResponseEntity<?> deleteItem (
+            @ApiParam("Code that identify item to delete") @PathVariable String codArt
+    ) throws NotFoundException {
         Item findItem = itemService.SelByCodArt(codArt);
         if (findItem == null) {
             String errorMessage = String.format("Item %s not available!", codArt);
