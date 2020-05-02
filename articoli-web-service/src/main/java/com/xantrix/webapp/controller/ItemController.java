@@ -99,7 +99,7 @@ public class ItemController {
     public ResponseEntity<List<Item>> listItemsByDescription(
             @ApiParam("Item's description") @PathVariable("description") String description
     ) throws NotFoundException {
-        List<Item> items = itemService.SelByDescrizione("%" + description + "%");
+        List<Item> items = itemService.SelByDescrizione(description);
         if (items == null || items.isEmpty()) {
             String errorMessage = String.format("Items with description %s not found.", description);
             logger.warn(errorMessage);

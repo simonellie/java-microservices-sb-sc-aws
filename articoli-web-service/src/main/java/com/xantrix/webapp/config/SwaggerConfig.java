@@ -21,7 +21,6 @@ public class SwaggerConfig {
         return new Docket(DocumentationType.SWAGGER_2)
                 .select()
                     .apis(RequestHandlerSelectors.basePackage("com.xantrix.webapp.controller"))
-                    .paths(regex("/api/item.*"))
                 .build()
                 .apiInfo(apiInfo());
     }
