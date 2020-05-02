@@ -31,7 +31,7 @@ import org.springframework.web.context.WebApplicationContext;
 @ContextConfiguration(classes = ItemsWebServiceApplication.class)
 @SpringBootTest
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class InsertArtTest {
+public class InsertItemTest {
 	 
     private MockMvc mockMvc;
 	
