@@ -1,4 +1,5 @@
 /.idea
-/.env
-/psdb-volume
-/dockervol
+/postgres-stack/psdb-volume
+/mongo-stack/data-volume/
+/postgres-stack/dockervol/
+/mongo-stack/config/
