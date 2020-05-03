@@ -19,7 +19,7 @@ import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private static final String[] USER_MATCHER = {"/api/item/search/**"};
-    private static final String[] ADMIN_MATCHER = {"/api/item/add/**", "/api/item/edit/**", "/api/item/delete/**"};
+    private static final String[] ADMIN_MATCHER = {"/api/item/add/**", "/api/item/edit/**", "/api/item/delete/**", "/cache/**"};
     private static final String REALM = "REAME";
 
     @Bean
