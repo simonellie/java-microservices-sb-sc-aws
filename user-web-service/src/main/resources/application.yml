@@ -1,0 +1,19 @@
+# ==============================================================
+# = GestUser - Servizio Gestione Utenti 
+# ==============================================================
+
+server:
+  port: 8019
+spring:
+  application:
+    name: GestUser
+# ==============================================================
+# = MONGODB Parameters
+# ==============================================================
+  data:
+    mongodb:
+      database: test
+      host: localhost
+      username: ema
+      password: ema
+      port: 27017
