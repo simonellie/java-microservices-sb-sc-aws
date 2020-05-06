@@ -27,3 +27,8 @@ spring:
           lob:
             non_contextual_creation: true
     show-sql: true
+
+guestuser:
+  url: http://localhost:8019/api/user/search/userid/
+  user: ReadUser
+  password: BimBumBam_2018

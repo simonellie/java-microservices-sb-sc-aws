@@ -50,6 +50,7 @@ public class UserController {
 	
 	@GetMapping(value = "/search/userid/{userId}")
 	public User getUtente(@PathVariable("userId") String UserId) throws NotFoundException {
+		logger.info("UserController::getUtente({})", UserId != null ? UserId : "(empty)");
 		User retVal = userService.getUserById(UserId);
 		
 		if (retVal == null) {
