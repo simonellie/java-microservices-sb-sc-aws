@@ -9,7 +9,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.xantrix.webapp</groupId>
-    <artifactId>authserver</artifactId>
+    <artifactId>auth-web-service</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>authserver</name>
     <description>Authorization server</description>
