@@ -1,6 +1,6 @@
-package com.xantrix.webapp.userwebservice.repository;
+package com.xantrix.webapp.repository;
 
-import com.xantrix.webapp.userwebservice.model.User;
+import com.xantrix.webapp.model.User;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 public interface UserRepository extends MongoRepository<User, String> {

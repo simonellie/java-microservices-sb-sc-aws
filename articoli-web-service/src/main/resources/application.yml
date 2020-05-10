@@ -32,3 +32,14 @@ guestuser:
   url: http://localhost:8019/api/user/search/userid/
   user: ReadUser
   password: BimBumBam_2018
+
+# ==============================================================
+# = Parametri Sicurezza JWT
+# ==============================================================
+sicurezza:
+  uri: /auth
+  refresh: /refresh
+  header: Authorization
+  prefix: Bearer
+  expiration: 86400
+  secret: 123_Stella

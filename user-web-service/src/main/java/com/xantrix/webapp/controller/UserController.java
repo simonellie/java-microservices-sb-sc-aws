@@ -1,11 +1,12 @@
-package com.xantrix.webapp.userwebservice.controller;
+package com.xantrix.webapp.controller;
 
 import java.util.List;
 
 import javax.validation.Valid;
 
-import com.xantrix.webapp.userwebservice.model.User;
-import com.xantrix.webapp.userwebservice.service.UserService;
+import com.xantrix.webapp.exception.BindingException;
+import com.xantrix.webapp.model.User;
+import com.xantrix.webapp.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,8 +29,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import com.xantrix.webapp.userwebservice.exception.BindingException;
-import com.xantrix.webapp.userwebservice.exception.NotFoundException;
+import com.xantrix.webapp.exception.NotFoundException;
 
 @RestController
 @RequestMapping(value = "/api/user")

@@ -1,4 +1,4 @@
-package com.xantrix.webapp.userwebservice.exception;
+package com.xantrix.webapp.exception;
 
 public class NotFoundException  extends Exception {
 	private static final long serialVersionUID = -8729169303699924451L;

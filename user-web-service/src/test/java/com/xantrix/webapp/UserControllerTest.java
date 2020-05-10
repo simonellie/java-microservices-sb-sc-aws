@@ -1,4 +1,4 @@
-package com.xantrix.webapp.userwebservice;
+package com.xantrix.webapp;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
@@ -7,7 +7,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
 
-import com.xantrix.webapp.userwebservice.repository.UserRepository;
+import com.xantrix.webapp.repository.UserRepository;
 import org.junit.Before;
 import org.junit.FixMethodOrder;
 import org.junit.Test;

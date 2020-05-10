@@ -1,14 +1,14 @@
-package com.xantrix.webapp.userwebservice.exception;
+package com.xantrix.webapp.exception;
 
-public class DuplicateException  extends Exception {
-	private static final long serialVersionUID = 1L;
+public class BindingException extends Exception {
+	private static final long serialVersionUID = -1646083143194195402L;
 	private String messaggio;
 	
-	public DuplicateException()	{
+	public BindingException() {
 		super();
 	}
 	
-	public DuplicateException(String Messaggio)	{
+	public BindingException(String Messaggio) {
 		super(Messaggio);
 		this.messaggio = Messaggio;
 	}

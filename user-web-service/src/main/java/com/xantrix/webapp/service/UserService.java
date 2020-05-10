@@ -1,6 +1,6 @@
-package com.xantrix.webapp.userwebservice.service;
+package com.xantrix.webapp.service;
 
-import com.xantrix.webapp.userwebservice.model.User;
+import com.xantrix.webapp.model.User;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package com.xantrix.webapp.userwebservice.security;
+package com.xantrix.webapp.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

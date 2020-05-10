@@ -1,9 +1,9 @@
-package com.xantrix.webapp.userwebservice.service;
+package com.xantrix.webapp.service;
 
 import java.util.List;
 
-import com.xantrix.webapp.userwebservice.model.User;
-import com.xantrix.webapp.userwebservice.repository.UserRepository;
+import com.xantrix.webapp.model.User;
+import com.xantrix.webapp.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

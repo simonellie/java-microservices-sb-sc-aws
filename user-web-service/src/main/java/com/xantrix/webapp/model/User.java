@@ -1,4 +1,4 @@
-package com.xantrix.webapp.userwebservice.model;
+package com.xantrix.webapp.model;
 
 import java.util.List;
 

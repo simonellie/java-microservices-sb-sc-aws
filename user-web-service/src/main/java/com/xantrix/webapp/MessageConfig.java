@@ -1,4 +1,4 @@
-package com.xantrix.webapp.userwebservice;
+package com.xantrix.webapp;
 
 import java.util.Locale;
 

@@ -1,4 +1,4 @@
-package com.xantrix.webapp.userwebservice.exception;
+package com.xantrix.webapp.exception;
 
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
