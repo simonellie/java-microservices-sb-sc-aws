@@ -45,7 +45,6 @@ services:
       - PGADMIN_DEFAULT_EMAIL=admin
       - PGADMIN_DEFAULT_PASSWORD=123_Stella
 
-
 volumes:
   psdb-volume:
 
