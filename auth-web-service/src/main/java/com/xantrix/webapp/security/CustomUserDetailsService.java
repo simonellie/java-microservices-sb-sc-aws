@@ -1,4 +1,4 @@
-package com.xantrix.webapp.authserver.security;
+package com.xantrix.webapp.security;
 
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -40,7 +40,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 		
 		UserBuilder builder = null;
 		builder = org.springframework.security.core.userdetails.User.withUsername(user.getUserId());
-		builder.disabled((user.getActive().equals("Si") ? false : true));
+		builder.disabled((user.getActive().equals("Yes") ? false : true));
 		builder.password(user.getPassword());
 		
 		String[] profili = user.getRoles()

@@ -1,4 +1,4 @@
-package com.xantrix.webapp.authserver;
+package com.xantrix.webapp;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

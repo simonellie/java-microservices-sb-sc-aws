@@ -1,4 +1,4 @@
-package com.xantrix.webapp.authserver.security;
+package com.xantrix.webapp.security;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package com.xantrix.webapp.authserver.security;
+package com.xantrix.webapp.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;

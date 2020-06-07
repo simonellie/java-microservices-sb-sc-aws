@@ -1,4 +1,4 @@
-package com.xantrix.webapp.authserver.controller;
+package com.xantrix.webapp.controller;
 
 import java.io.Serializable;
 
