@@ -3,3 +3,4 @@
 /mongo-stack/data-volume/
 /postgres-stack/dockervol/
 /mongo-stack/config/
+/user-web-service/embeddedMongoDB/

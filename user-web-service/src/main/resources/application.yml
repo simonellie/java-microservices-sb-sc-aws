@@ -7,13 +7,10 @@ server:
 spring:
   application:
     name: GestUser
+
 # ==============================================================
 # = MONGODB Parameters
 # ==============================================================
-  data:
-    mongodb:
-      database: test
-      host: localhost
-      username: ema
-      password: ema
-      port: 27017
+
+spring.mongodb.embedded.storage.database-dir: ./user-web-service/embeddedMongoDB
+spring.mongodb.embedded.storage.oplog-size: 0
